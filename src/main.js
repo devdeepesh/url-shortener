@@ -1,14 +1,16 @@
-import { Client } from 'node-appwrite';
+import { Client, Databases, ID } from 'node-appwrite';
 
 // This is your Appwrite function
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
   // Why not try the Appwrite SDK?
   //
-  // const client = new Client()
-  //    .setEndpoint('https://cloud.appwrite.io/v1')
-  //    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-  //    .setKey(process.env.APPWRITE_API_KEY);
+  const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('6675381500139de6f452')
+    .setKey(process.env.APPWRITE_API_KEY);
+
+  const db = new Databases(client);
 
   // You can log messages to the console
   log('Hello, Logs!');
@@ -18,6 +20,17 @@ export default async ({ req, res, log, error }) => {
 
   // The `req` object contains the request data
   if (req.method === 'GET') {
+    const json = JSON.stringify(req);
+
+    await db.createDocument(
+      '6675396f000053648890',
+      '6675397500346d84bc1b',
+      ID.unique(),
+      {
+        request: json,
+      }
+    );
+
     // Send a response with the res object helpers
     // `res.send()` dispatches a string back to the client
     return res.send('Hello, World!');
