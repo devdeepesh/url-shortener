@@ -24,7 +24,7 @@ export default async ({ req, res, log, error }) => {
 
     await db.createDocument(
       '6675396f000053648890',
-      '6675397500346d84bc1b',
+      '66753a8800161783b01f',
       ID.unique(),
       {
         request: json,
